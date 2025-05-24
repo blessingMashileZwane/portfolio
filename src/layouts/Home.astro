@@ -1,0 +1,44 @@
+---
+import { Accordion } from "@/components/Accordion";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
+import { Content as ContactDetails } from "../content/contact.md";
+import { marked } from "marked";
+
+const dataImport = await Astro.glob("../content/*.md");
+
+const filteredDataImport = dataImport.filter(
+	(data) => !data.file.includes("../content/contact.md")
+);
+
+const accordionData = filteredDataImport.map((dataItem) => ({
+	title: dataItem.frontmatter.title,
+	description: dataItem.frontmatter.description,
+	content: marked(dataItem.rawContent()),
+}));
+---
+
+<Card>
+	<CardHeader>
+		<CardTitle>Blessing Mashile-Zwane</CardTitle>
+		<CardDescription>curriculum vitae</CardDescription>
+		<div class="flex justify-between"><ContactDetails class="max-h-10" /></div>
+	</CardHeader>
+	<CardContent>
+		<Accordion data={accordionData} client:idle />
+	</CardContent>
+	<CardFooter>
+		<a
+			href="https://github.com/blessingMashileZwane"
+			target="_blank"
+			class="text-violet-700 focus-visible:border-ring focus-visible:ring-ring/50"
+			>My github &#128513;</a
+		>
+	</CardFooter>
+</Card>
