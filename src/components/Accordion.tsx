@@ -10,11 +10,13 @@ interface Props {
         title: string;
         description: string;
         content: any;
+        tableate?: boolean;
     }[];
 }
 
 interface MarkdownRendererProps {
     html: string;
+    tableate?: boolean;
 }
 
 export function Accordion({ data }: Props) {
@@ -24,7 +26,7 @@ export function Accordion({ data }: Props) {
                 return (
                     <AccordionItem value={`item-${i.toFixed()}`}>
                         <AccordionTrigger><strong><i>{item.title}</i></strong></AccordionTrigger>
-                        <AccordionContent><MarkdownRenderer html={item.content} /></AccordionContent>
+                        <AccordionContent><MarkdownRenderer html={item.content} tableate={item.tableate} /></AccordionContent>
 
                     </AccordionItem>
                 );
@@ -33,6 +35,6 @@ export function Accordion({ data }: Props) {
     );
 }
 
-function MarkdownRenderer({ html }: MarkdownRendererProps) {
-    return <div dangerouslySetInnerHTML={{ __html: html }} />;
+function MarkdownRenderer({ html, tableate }: MarkdownRendererProps) {
+    return <div className={tableate ? `max-w-full overflow-x-auto` : ``} dangerouslySetInnerHTML={{ __html: html }} />;
 }
