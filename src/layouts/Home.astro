@@ -29,7 +29,9 @@ const accordionData = filteredDataImport.map((dataItem) => ({
 	<CardHeader>
 		<CardTitle>Blessing Mashile-Zwane</CardTitle>
 		<CardDescription>curriculum vitae</CardDescription>
-		<div class="flex justify-between"><ContactDetails /></div>
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+			<ContactDetails />
+		</div>
 	</CardHeader>
 	<CardContent>
 		<Accordion data={accordionData} client:idle />
