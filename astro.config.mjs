@@ -8,5 +8,7 @@ export default defineConfig({
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()]
-  }
+  },
+  site: 'https://blessingMashileZwane.github.io',
+  base: '/portfolio'
 });
